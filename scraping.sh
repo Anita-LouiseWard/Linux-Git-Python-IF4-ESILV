@@ -13,3 +13,4 @@ HORAIRE=$(echo "$INFORMATION" | grep -o "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" | sed
 
 # Affichage des informations récupérées
 echo "Les valeurs de l'heure sont : $HORAIRE"
+echo "$HORAIRE" > horaire.txt
