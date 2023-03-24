@@ -8,4 +8,4 @@ app.layout = html.Div(children = [
     html.H2("Test")
 ])
 
-app.run_server(debug=True, host='0.0.0.0') 
+app.run_server(debug=True) 
