@@ -1,20 +1,18 @@
 import dash
 import dash_html_components as html
+import time
 
-# Ouvrir le fichier texte
+#Récupérer la dernière lignes du fichier texte
 with open('horaire.txt', 'r') as f:
+    lines = f.readlines()
+    last_line = lines[-1].strip()
+    #Récupère les heures dans la dernière ligne de horaire.txt
+    heure = last_line[:2]
+    #Récupère les minutes dans la dernière ligne de horaire.txt
+    minutes = last_line[2:4]
     #Création de l'historique
     historique = []
-    # Lire chaque ligne du fichier
-    for line in f:
-        # Extraire l'heure
-        heure = line[:2]
 
-with open('horaire.txt', 'r') as f:
-    # Lire chaque ligne du fichier
-    for line in f:
-        # Extraire les minutes
-        minutes = line[2:4]
 
 heure_minute = heure + "H" + minutes
 historique.append(heure_minute)
@@ -23,7 +21,7 @@ app = dash.Dash(__name__)
 
 app.layout = html.Div(children = [
     html.H1(f"A paris, il est actuellement : {heure}h{minutes}"),
-    html.H2("Historique :"),
+    html.H2("Les 10 derniers horaires récupérés sont :"),
     html.Ul([html.Li(historique[i]) for i in range(len(historique))])
 ])
 
