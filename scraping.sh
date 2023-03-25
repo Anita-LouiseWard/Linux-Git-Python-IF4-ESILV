@@ -11,9 +11,21 @@ INFORMATION=$(echo "$CONTENT" | grep "hours" | grep "minutes" | grep "seconds" |
 
 HORAIRE=$(echo "$INFORMATION" | grep -o "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]" | sed 's/://g')
 
+SUNSET=$(echo "$CONTENT" | grep "city.sunset")
+
 # Affichage des informations récupérées
 echo "Les valeurs de l'heure sont : $HORAIRE"
 echo "$HORAIRE" >> horaire.txt
+echo "$SUNSET" >> sunset.txt
+
+# Récupérer la dernière ligne du fichier sunset.txt
+last_line=$(tail -n 1 sunset.txt)
+
+# Extraire la valeur de "sunset" à partir de la dernière ligne
+sunset=$(echo $last_line | grep -oP '(?<=sunset">)[0-9]{2}:[0-9]{2}')
+
+echo "Le soleil se couche à : $sunset"
+
 
 LINES=$(wc -l < horaire.txt)
 if [ $LINES -gt 10 ]; then

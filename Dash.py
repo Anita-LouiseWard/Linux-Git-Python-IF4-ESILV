@@ -15,10 +15,10 @@ def update_horaires():
         # Récupère les minutes dans la dernière ligne de horaire.txt
         minutes = last_line[2:4]
         # Création de l'historique
-        historique = []
+        historique = [line.strip() for line in lines[-10:][::-1]]
 
     heure_minute = heure + "H" + minutes
-    historique.append(heure_minute)
+    #historique.append(heure_minute)
 
     return html.Div(children = [
         html.H1(f"A paris, il est actuellement : {heure}h{minutes}"),
@@ -32,7 +32,7 @@ app.layout = html.Div(children = [
     html.Div(id='horaires-div'),
     dcc.Interval(
         id='interval-component',
-        interval=5*1000, # en millisecondes
+        interval=30*1000, # en millisecondes
         n_intervals=0
     )
 ])
